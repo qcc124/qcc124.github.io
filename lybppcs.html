@@ -1,0 +1,30 @@
+<body>
+    <div id="txt">
+    <a>留言板（记得写上用户名）<a/>
+    <textarea  id="text" value="" cols="30" rows="5"></textarea><br>
+       <button type="button" id="btn">发送！</button>
+       <div id="lis">
+         <ol id="text_li">
+         </ol>
+       </div>
+    </div>
+</body>
+<script type="text/javascript">
+     var tet= document.getElementById("text");
+     var butt= document.getElementById("btn");
+     var tet_li= document.getElementById("text_li");
+          butt.onclick = function msg(){
+     
+  }
+       </script>
+       <script type="text/javascript">
+             var tet= document.getElementById("text");
+              var butt= document.getElementById("btn");
+              var tet_li= document.getElementById("text_li");
+ 
+      butt.onclick=function msg(){
+      var Li= document.createElement("li");
+      Li.innerHTML= tet.value;
+      tet_li.appendChild(Li);
+  }
+       </script>
