@@ -1,72 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<a>×óÓÒ¼üÒÆ¶¯£¬¿Õ¸ñ¼ü»»·½Ïò<a>
-    <meta charset="gb18030">
-    <title>¶íÂŞË¹·½¿é</title>
+<a>å·¦å³é”®ç§»åŠ¨ï¼Œç©ºæ ¼é”®æ¢æ–¹å‘<a>
+    <meta charset="UTF-8">
+    <title>ä¿„ç½—æ–¯æ–¹å—</title>
     <style type="text/css">
         #tetris{ margin: 10px 250px;}
     </style>
 </head>
 <body>
     <canvas width="700" height="525" id="tetris"></canvas>
-    <div id="text" style='color: blue;font-size: 30px;'>·ÖÊı£º0</div>
+    <div id="text" style='color: blue;font-size: 30px;'>åˆ†æ•°ï¼š0</div>
     <script type="text/javascript">
         /**
-         * [Ò»¸öÍêÕûµÄ¶íÂŞË¹·½¿éÀà design by magic_xiang]
-         * @param  {number} side     [Ã¿¸ö·½¿é±ß³¤(px),Ä¬ÈÏ35]
-         * @param  {number} width     [Ò»ĞĞ°üº¬µÄ·½¿éÊı(¸ö),Ä¬ÈÏ20]
-         * @param  {number} height     [Ò»ÁĞ°üº¬µÄ·½¿éÊı(¸ö),Ä¬ÈÏ15]
-         * @param  {number} speed     [·½¿éÏÂÂäÒÆ¶¯ËÙ¶È(ms),Ä¬ÈÏ400]
+         * [ä¸€ä¸ªå®Œæ•´çš„ä¿„ç½—æ–¯æ–¹å—ç±» design by magic_xiang]
+         * @param  {number} side     [æ¯ä¸ªæ–¹å—è¾¹é•¿(px),é»˜è®¤35]
+         * @param  {number} width     [ä¸€è¡ŒåŒ…å«çš„æ–¹å—æ•°(ä¸ª),é»˜è®¤20]
+         * @param  {number} height     [ä¸€åˆ—åŒ…å«çš„æ–¹å—æ•°(ä¸ª),é»˜è®¤15]
+         * @param  {number} speed     [æ–¹å—ä¸‹è½ç§»åŠ¨é€Ÿåº¦(ms),é»˜è®¤400]
          */
         class tetris{
             constructor(side=35, width=20, height=15, speed=400){
-                this.side = side            // Ã¿¸ö·½¿é±ß³¤
-                this.width = width            // Ò»ĞĞ°üº¬µÄ·½¿éÊı
-                this.height = height        // Ò»ÁĞ°üº¬µÄ·½¿éÊı
-                this.speed = speed             // ·½¿éÏÂÂäÒÆ¶¯ËÙ¶È
-                this.num_blcok                // µ±Ç°·½¿éÀàĞÍµÄÊı×Ö±äÁ¿
-                this.type_color                // µ±Ç°ÑÕÉ«ÀàĞÍµÄ×Ö·û´®±äÁ¿
-                this.ident                    // setIntervalµÄ±êÊ¶
-                this.direction = 1            // ·½¿é·½Ïò,³õÊ¼»¯Îª1£¬Ä¬ÈÏ×´Ì¬    
-                this.grade = 0                // ÓÃÀ´¼ÆËã·ÖÊı
-                this.over = false            // ÓÎÏ·ÊÇ·ñ½áÊø
-                this.arr_bX = []            // ´æ·Åµ±Ç°·½¿éµÄX×ø±ê
-                this.arr_bY = []            // ´æ·Åµ±Ç°·½¿éµÄY×ø±ê
-                this.arr_store_X = []        // ´æ·Åµ½´ïµ×²¿ËùÓĞ·½¿éµÄX×ø±ê
-                this.arr_store_Y = []        // ´æ·Åµ½´ïµ×²¿ËùÓĞ·½¿éµÄY×ø±ê
-                this.arr_store_color = []    // ´æ·Åµ½´ïµ×²¿ËùÓĞ·½¿éµÄÑÕÉ«
+                this.side = side            // æ¯ä¸ªæ–¹å—è¾¹é•¿
+                this.width = width            // ä¸€è¡ŒåŒ…å«çš„æ–¹å—æ•°
+                this.height = height        // ä¸€åˆ—åŒ…å«çš„æ–¹å—æ•°
+                this.speed = speed             // æ–¹å—ä¸‹è½ç§»åŠ¨é€Ÿåº¦
+                this.num_blcok                // å½“å‰æ–¹å—ç±»å‹çš„æ•°å­—å˜é‡
+                this.type_color                // å½“å‰é¢œè‰²ç±»å‹çš„å­—ç¬¦ä¸²å˜é‡
+                this.ident                    // setIntervalçš„æ ‡è¯†
+                this.direction = 1            // æ–¹å—æ–¹å‘,åˆå§‹åŒ–ä¸º1ï¼Œé»˜è®¤çŠ¶æ€    
+                this.grade = 0                // ç”¨æ¥è®¡ç®—åˆ†æ•°
+                this.over = false            // æ¸¸æˆæ˜¯å¦ç»“æŸ
+                this.arr_bX = []            // å­˜æ”¾å½“å‰æ–¹å—çš„Xåæ ‡
+                this.arr_bY = []            // å­˜æ”¾å½“å‰æ–¹å—çš„Yåæ ‡
+                this.arr_store_X = []        // å­˜æ”¾åˆ°è¾¾åº•éƒ¨æ‰€æœ‰æ–¹å—çš„Xåæ ‡
+                this.arr_store_Y = []        // å­˜æ”¾åˆ°è¾¾åº•éƒ¨æ‰€æœ‰æ–¹å—çš„Yåæ ‡
+                this.arr_store_color = []    // å­˜æ”¾åˆ°è¾¾åº•éƒ¨æ‰€æœ‰æ–¹å—çš„é¢œè‰²
                 this.paints = document.getElementById('tetris').getContext('2d')
-                //»ñÈ¡»­±Ê
+                //è·å–ç”»ç¬”
                 self = this
             }
  
-            // ·â×°paints·½·¨£¬ÈÃ´úÂë¸ü¼ò½à
+            // å°è£…paintsæ–¹æ³•ï¼Œè®©ä»£ç æ›´ç®€æ´
             paintfr(x, y, scale=1){
                 this.paints.fillRect(x*this.side, y*this.side, scale*this.side, scale*this.side)
             }
  
-            // ÓÎÏ·¿ªÊ¼
+            // æ¸¸æˆå¼€å§‹
             gameStart(){
                 this.init()
                 this.run()
             }
  
-            // ³õÊ¼»¯¹¤×÷
+            // åˆå§‹åŒ–å·¥ä½œ
             init(){
                 this.initBackground()
                 this.initBlock()
             }
  
-            // ·½¿é×Ô¶¯ÏÂÂä
+            // æ–¹å—è‡ªåŠ¨ä¸‹è½
             run(){
                 this.ident = setInterval("self.down_speed_up()", this.speed)
             }
  
-            // ³õÊ¼»¯µØÍ¼
+            // åˆå§‹åŒ–åœ°å›¾
             initBackground(){
                 this.paints.beginPath()
-                this.paints.fillStyle='#000000'        //µØÍ¼Ìî³äÑÕÉ«ÎªºÚÉ«
+                this.paints.fillStyle='#000000'        //åœ°å›¾å¡«å……é¢œè‰²ä¸ºé»‘è‰²
                 for(let i = 0; i < this.height; i++){
                     for(let j = 0; j < this.width; j++){
                         this.paintfr(j, i)
@@ -75,19 +75,19 @@
                 this.paints.closePath()
             }
  
-            // ³õÊ¼»¯·½¿éµÄÎ»ÖÃºÍÑÕÉ«
+            // åˆå§‹åŒ–æ–¹å—çš„ä½ç½®å’Œé¢œè‰²
             initBlock(){
                 this.paints.beginPath()
-                this.createRandom('rColor')        //Éú³ÉÑÕÉ«×Ö·û´®£¬
+                this.createRandom('rColor')        //ç”Ÿæˆé¢œè‰²å­—ç¬¦ä¸²ï¼Œ
                 this.paints.fillStyle = this.type_color
-                this.createRandom('rBlock')        //Éú³É·½¿éÀàĞÍÊı×Ö
+                this.createRandom('rBlock')        //ç”Ÿæˆæ–¹å—ç±»å‹æ•°å­—
                 this.arr_bX.forEach((item, index) => {
                     this.paintfr(item, this.arr_bY[index], 0.9)
                 })
                 this.paints.closePath()
             }
  
-            // ÀûÓÃÊı×é»­·½¿é
+            // åˆ©ç”¨æ•°ç»„ç”»æ–¹å—
             drawBlock(color){
                 this.paints.beginPath()
                 this.paints.fillStyle = color
@@ -97,7 +97,7 @@
                 this.paints.closePath()
             }
  
-            // »­ÒÑ¾­ÔÚ¶¨Î»ºÃµÄ·½¿é
+            // ç”»å·²ç»åœ¨å®šä½å¥½çš„æ–¹å—
             drawStaticBlock(){
                 this.arr_store_X.forEach((item, index) => {
                     this.paints.beginPath()
@@ -107,11 +107,11 @@
                 })
             }
  
-            // Éú³ÉËæ»úÊı·µ»Ø·½¿éÀàĞÍ»òÑÕÉ«ÀàĞÍ
+            // ç”Ÿæˆéšæœºæ•°è¿”å›æ–¹å—ç±»å‹æˆ–é¢œè‰²ç±»å‹
             createRandom(type){
                 let temp = this.width/2-1
  
-                if (type == 'rBlock'){         //Èç¹ûÊÇ·½¿éÀàĞÍ
+                if (type == 'rBlock'){         //å¦‚æœæ˜¯æ–¹å—ç±»å‹
                     this.num_blcok = Math.round(Math.random()*4+1)
                     switch(this.num_blcok){
                         case 1:
@@ -136,7 +136,7 @@
                             break
                     }
                 }
-                if (type == 'rColor'){                         //Èç¹ûÊÇÑÕÉ«ÀàĞÍ
+                if (type == 'rColor'){                         //å¦‚æœæ˜¯é¢œè‰²ç±»å‹
                     let num_color = Math.round(Math.random()*8+1) 
  
                     switch(num_color){
@@ -171,13 +171,13 @@
                 }
             }
  
-            // ÅĞ¶Ï·½¿éÖ®¼äÊÇ·ñÅö×²(ÏÂ)£¬ÒÔ¼°±äĞÎÊ±ÊÇ·ñÔ½¹ıÏÂ±ß½ç
+            // åˆ¤æ–­æ–¹å—ä¹‹é—´æ˜¯å¦ç¢°æ’(ä¸‹)ï¼Œä»¥åŠå˜å½¢æ—¶æ˜¯å¦è¶Šè¿‡ä¸‹è¾¹ç•Œ
             judgeCollision_down(){
                 for(let i = 0; i < this.arr_bX.length; i++){
-                    if (this.arr_bY[i] + 1 == this.height){ //±äĞÎÊ±ÊÇ·ñÔ½¹ıÏÂ±ß½ç
+                    if (this.arr_bY[i] + 1 == this.height){ //å˜å½¢æ—¶æ˜¯å¦è¶Šè¿‡ä¸‹è¾¹ç•Œ
                         return false
                     } 
-                    if (this.arr_store_X.length != 0) {    //ÅĞ¶Ï·½¿éÖ®¼äÊÇ·ñÅö×²(ÏÂ)
+                    if (this.arr_store_X.length != 0) {    //åˆ¤æ–­æ–¹å—ä¹‹é—´æ˜¯å¦ç¢°æ’(ä¸‹)
                         for(let j = 0; j < this.arr_store_X.length; j++){
                             if (this.arr_bX[i] == this.arr_store_X[j]) {
                                 if (this.arr_bY[i] + 1 == this.arr_store_Y[j]) {
@@ -191,18 +191,18 @@
                 return true
             }
  
-            //ÅĞ¶Ï·½¿éÖ®¼äÊÇ·ñÅö×²(×óÓÒ)£¬ÒÔ¼°±äĞÎÊ±ÊÇ·ñÔ½¹ı×óÓÒ±ß½ç
+            //åˆ¤æ–­æ–¹å—ä¹‹é—´æ˜¯å¦ç¢°æ’(å·¦å³)ï¼Œä»¥åŠå˜å½¢æ—¶æ˜¯å¦è¶Šè¿‡å·¦å³è¾¹ç•Œ
             judgeCollision_other(num){
                 for(let i = 0; i < this.arr_bX.length; i++){
-                    if (num == 1) {            //±äĞÎÊ±ÊÇ·ñÔ½¹ıÓÒ±ß½ç
+                    if (num == 1) {            //å˜å½¢æ—¶æ˜¯å¦è¶Šè¿‡å³è¾¹ç•Œ
                         if (this.arr_bX[i] == this.width - 1) 
                             return false
                     }
-                    if (num == -1) {                //±äĞÎÊ±ÊÇ·ñÔ½¹ı×ó±ß½ç
+                    if (num == -1) {                //å˜å½¢æ—¶æ˜¯å¦è¶Šè¿‡å·¦è¾¹ç•Œ
                         if (this.arr_bX[i] == 0)
                             return false
                     }
-                    if (this.arr_store_X.length != 0) {                    //ÅĞ¶Ï·½¿éÖ®¼äÊÇ·ñÅö×²(×óÓÒ)
+                    if (this.arr_store_X.length != 0) {                    //åˆ¤æ–­æ–¹å—ä¹‹é—´æ˜¯å¦ç¢°æ’(å·¦å³)
                         for(let j = 0; j < this.arr_store_X.length; j++){
                             if (this.arr_bY[i] == this.arr_store_Y[j]) {
                                 if (this.arr_bX[i] + num == this.arr_store_X[j]) {
@@ -216,7 +216,7 @@
             }
  
  
-            //·½Ïò¼üÎªÏÂµÄ¼ÓËÙº¯Êı
+            //æ–¹å‘é”®ä¸ºä¸‹çš„åŠ é€Ÿå‡½æ•°
             down_speed_up(){
                 let flag_all_down = true
                 flag_all_down = this.judgeCollision_down()
@@ -244,11 +244,11 @@
                 this.gameover()
             }
  
-            //·½Ïò¼üÎª×óÓÒµÄ×óÒÆ¶¯º¯Êı
+            //æ–¹å‘é”®ä¸ºå·¦å³çš„å·¦ç§»åŠ¨å‡½æ•°
             move(dir_temp){
                 this.initBackground()
  
-                if (dir_temp == 1) {                    //ÓÒ
+                if (dir_temp == 1) {                    //å³
                     let flag_all_right = true
                     flag_all_right = this.judgeCollision_other(1)
                      
@@ -272,7 +272,7 @@
                 this.drawStaticBlock()
             }
  
-            //·½Ïò¼üÎª¿Õ¸ñµÄ±ä»»·½Ïòº¯Êı
+            //æ–¹å‘é”®ä¸ºç©ºæ ¼çš„å˜æ¢æ–¹å‘å‡½æ•°
             up_change_direction(num_blcok){ 
                 if (num_blcok == 5) {
                     return
@@ -280,17 +280,17 @@
                  
                 let arr_tempX = []
                 let arr_tempY = []
-                //ÒòÎª²»ÖªµÀÊÇ·ñÄÜ¹»±äĞÎ³É¹¦£¬ËùÒÔÏÈ´æ´¢ÆğÀ´
+                //å› ä¸ºä¸çŸ¥é“æ˜¯å¦èƒ½å¤Ÿå˜å½¢æˆåŠŸï¼Œæ‰€ä»¥å…ˆå­˜å‚¨èµ·æ¥
                 for(let i = 0;i < this.arr_bX.length; i++){    
                     arr_tempX.push(this.arr_bX[i])
                     arr_tempY.push(this.arr_bY[i])
                 }
                 this.direction++
-                //½«ÖĞĞÄ×ø±êÌáÈ¡³öÀ´£¬±äĞÎ¶¼ÒÔµ±Ç°ÖĞĞÄÎª×¼
+                //å°†ä¸­å¿ƒåæ ‡æå–å‡ºæ¥ï¼Œå˜å½¢éƒ½ä»¥å½“å‰ä¸­å¿ƒä¸ºå‡†
                 let ax_temp = this.arr_bX[0]    
                 let ay_temp = this.arr_bY[0]
                  
-                this.arr_bX.splice(0, this.arr_bX.length)            //½«Êı×éÇå¿Õ 
+                this.arr_bX.splice(0, this.arr_bX.length)            //å°†æ•°ç»„æ¸…ç©º 
                 this.arr_bY.splice(0, this.arr_bY.length)
  
                 if (num_blcok == 1) {
@@ -378,7 +378,7 @@
                     }
                 }
                  
-                if (! (this.judgeCollision_other(-1) && this.judgeCollision_down() && this.judgeCollision_other(1)  )) {            //Èç¹û±äĞÎ²»³É¹¦ÔòÖ´ĞĞÏÂÃæ´úÂë
+                if (! (this.judgeCollision_other(-1) && this.judgeCollision_down() && this.judgeCollision_other(1)  )) {            //å¦‚æœå˜å½¢ä¸æˆåŠŸåˆ™æ‰§è¡Œä¸‹é¢ä»£ç 
                     this.arr_bX.splice(0, this.arr_bX.length)             
                     this.arr_bY.splice(0, this.arr_bY.length)
                     for(let i=0; i< arr_tempX.length; i++){
@@ -389,9 +389,9 @@
                 this.drawStaticBlock()
             }
  
-            //Ò»ĞĞÂúÁËÇå¿Õ·½¿é£¬ÉÏÃæ·½¿éY×ø±ê+1
+            //ä¸€è¡Œæ»¡äº†æ¸…ç©ºæ–¹å—ï¼Œä¸Šé¢æ–¹å—Yåæ ‡+1
             clearUnderBlock(){
-                //É¾³ıµÍ²ã·½¿é
+                //åˆ é™¤ä½å±‚æ–¹å—
                 let arr_row=[]
                 let line_num
                 if (this.arr_store_X.length != 0) {
@@ -411,17 +411,17 @@
                 }
                      
                 if (arr_row.length == this.width) {
-                    //¼ÆËã³É¼¨grade
+                    //è®¡ç®—æˆç»©grade
                     this.grade++
                      
-                    document.getElementById('text').innerHTML = 'µ±Ç°³É¼¨£º'+this.grade
+                    document.getElementById('text').innerHTML = 'å½“å‰æˆç»©ï¼š'+this.grade
                     for(let i = 0; i < arr_row.length; i++){
                         this.arr_store_X.splice(arr_row[i]-i, 1)
                         this.arr_store_Y.splice(arr_row[i]-i, 1)
                         this.arr_store_color.splice(arr_row[i]-i, 1)
                     }
                  
-                    //ÈÃÉÏÃæµÄ·½¿éÍùÏÂµôÒ»¸ñ
+                    //è®©ä¸Šé¢çš„æ–¹å—å¾€ä¸‹æ‰ä¸€æ ¼
                     for(let i = 0; i < this.arr_store_color.length; i++){
                         if (this.arr_store_Y[i] < line_num) {
                             this.arr_store_Y[i] = this.arr_store_Y[i]+1
@@ -430,7 +430,7 @@
                 }
             }
  
-            //ÅĞ¶ÏÓÎÏ·½áÊø
+            //åˆ¤æ–­æ¸¸æˆç»“æŸ
             gameover(){
                 for(let i=0; i < this.arr_store_X.length; i++){
                     if (this.arr_store_Y[i] == 0) {
@@ -444,26 +444,26 @@
         let tetrisObj = new tetris()
         tetrisObj.gameStart()
          
-        //·½Ïò¼ü¹¦ÄÜº¯Êı
+        //æ–¹å‘é”®åŠŸèƒ½å‡½æ•°
         document.onkeydown = (e) => {   
             if (tetrisObj.over)
                 return
  
             switch(e.keyCode){
-                case 40:  // ·½ÏòÎªÏÂ
+                case 40:  // æ–¹å‘ä¸ºä¸‹
                     tetrisObj.down_speed_up()
                     break
-                case 32:  // ¿Õ¸ñ»»·½Ïò
-                    tetrisObj.initBackground()        //ÖØ»­µØÍ¼
+                case 32:  // ç©ºæ ¼æ¢æ–¹å‘
+                    tetrisObj.initBackground()        //é‡ç”»åœ°å›¾
                     tetrisObj.up_change_direction(tetrisObj.num_blcok)
                     tetrisObj.drawBlock(tetrisObj.type_color)
                     break
-                case 37:  // ·½ÏòÎª×ó
+                case 37:  // æ–¹å‘ä¸ºå·¦
                     tetrisObj.initBackground()
                     tetrisObj.move(-1)
                     tetrisObj.drawBlock(tetrisObj.type_color)
                     break
-                case 39:  // ·½ÏòÎªÓÒ
+                case 39:  // æ–¹å‘ä¸ºå³
                     tetrisObj.initBackground()
                     tetrisObj.move(1)
                     tetrisObj.drawBlock(tetrisObj.type_color)
