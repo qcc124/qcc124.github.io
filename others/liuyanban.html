@@ -1,0 +1,85 @@
+<meta charset="UTF-8">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title></title>
+</head>
+<body>
+<h1>
+留言板</h1>
+<h3>注意：请文明发言，禁止在评论区内暴露自己的个人信息（如真实姓名等）或者是在里面搞诈骗等内容（除了rickroll以外）,否则管理员将会去除留言板功能！<h3>
+<br>
+<h4>评论查看区<h4>
+<div id="msg" style="margin: 10px 0; border: 1px solid black; padding: 10px; width: 300px;
+min-height: 100px;">
+</div>
+<a>评论输入区<a>
+<input type="text" id="text" placeholder="（一定要标上用户名，不然的话管理员会分不清是谁发的）" style="height:100px;width:320px;"/>
+<button onclick="save();">
+留言/查看评论</button>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h5>谢谢您的留言和使用，我们会做得更好 ^_^<h5>
+<br>
+<h5>祝你们长命百岁，心想事成！<h5>
+<script type="text/javascript">
+var msg = document.getElementById('msg'),
+text = document.getElementById('text');
+function save() {
+var str = text.value;
+var k = new Date().getTime();
+localStorage.setItem(k, str);
+init();
+}
+
+function init() {
+msg.innerHTML = '';
+var dom = '';
+for (var i = 0, len = localStorage.length; i < len; i++) {
+dom += '<div>' +''+ '' + localStorage.getItem(localStorage.key(i)) + '</div>'
+}
+msg.innerHTML = dom;
+}
+
+function _clear() {
+msg.innerHTML = '';
+localStorage.clear();
+}
+
+</script>
+</body>
+</html>
