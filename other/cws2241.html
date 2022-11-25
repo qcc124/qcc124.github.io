@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>计时器</title>
+  <style>
+    #div1 {
+      width: 300px;
+      height: 400px;
+      background: skyblue;
+      margin: 100px auto;
+      text-align: center;
+    }
+    
+    #count {
+      width: 200px;
+      height: 150px;
+      line-height: 150px;
+      margin: auto;
+      font-size: 40px;
+    }
+    
+    #div1 input {
+      width: 150px;
+      height: 40px;
+      background: orange;
+      font-size: 25px;
+      margin-top: 20px
+    }
+  </style>
+</head>
+
+<body>
+  <div id="div1">
+    <div id="count">
+      <span id="id_H">00</span>
+      <span id="id_M">00</span>
+      <span id="id_S">00</span>
+    </div>
+    <input id="start" type="button" value="开始">
+    <input id="pause" type="button" value="暂停">
+    <input id="stop" type="button" value="归零">
+  </div>
+  <script>
+    //可以将查找标签节点的操作进行简化 var btn = getElementById('btn')
+    function $(id) {
+      return document.getElementById(id)
+    }
+    window.onload = function() {
+      //点击开始建 开始计数
+      var count = 0
+      var timer = null //timer变量记录定时器setInterval的返回值
+      $("start").onclick = function() {
+        timer = setInterval(function() {
+          count++;
+          console.log(count)
+            // 需要改变页面上时分秒的值
+          console.log($("id_S"))
+          $("id_S").innerHTML = showNum(count % 60)
+          $("id_M").innerHTML = showNum(parseInt(count / 60) % 60)
+          $("id_H").innerHTML = showNum(parseInt(count / 60 / 60))
+        }, 1000)
+      }
+      $("pause").onclick = function() {
+          //取消定时器
+          clearInterval(timer)
+        }
+        //停止记数 数据清零 页面展示数据清零
+      $("stop").onclick = function() {
+        //取消定时器
+        $("pause").onclick()
+          // clearInterval(timer)
+          //数据清零 总秒数清零
+        count = 0
+          //页面展示数据清零
+        $("id_S").innerHTML = "00"
+        $("id_M").innerHTML = "00"
+        $("id_H").innerHTML = "00"
+      }
+
+      //封装一个处理单位数字的函数
+      function showNum(num) {
+        if (num < 10) {
+          return '0' + num
+        }
+        return num
+      }
+    }
+  </script>
+</body>
+
+</html>
